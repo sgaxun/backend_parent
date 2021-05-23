@@ -1,0 +1,21 @@
+mybatis-plus:
+  mapper-locations: classpath*:com/mooc/meetingfilm/**/xml/*Mapper.xml
+  global-config:
+    db-config:
+      id-type: 0 #0:数据库ID资增 1:用户输入id 2:全局唯一id(IDWorker) 3:全局唯一ID
+      db-column-underline: false
+      refresh-mapper: true
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    druid:
+      url: jdbc:mysql://192.168.31.120:3306/mooc_meetingfilm?suseUnicode=true&characterEncoding=UTF-8
+      username: root
+      password: ch23138210CH
+      filters: lo4j,wall,mergeStat
+
+
+logging:
+  config: classpath:logback.xml
