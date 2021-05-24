@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mooc.meetingfilm.film.dao.mapper.MoocFilmTMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.mooc.meetingfilm.film.dao.entity.MoocFilmT">
+        <id column="UUID" property="uuid" />
+        <result column="film_name" property="filmName" />
+        <result column="film_type" property="filmType" />
+        <result column="img_address" property="imgAddress" />
+        <result column="film_score" property="filmScore" />
+        <result column="film_preSaleNum" property="filmPresalenum" />
+        <result column="film_box_office" property="filmBoxOffice" />
+        <result column="film_source" property="filmSource" />
+        <result column="film_cats" property="filmCats" />
+        <result column="film_area" property="filmArea" />
+        <result column="film_date" property="filmDate" />
+        <result column="film_time" property="filmTime" />
+        <result column="film_status" property="filmStatus" />
+    </resultMap>
+
+    <select id="describeFilms" resultType="com.mooc.meetingfilm.film.controller.vo.DescribeFilmsRespVO">
+        select
+            film.UUID as filmId,
+            film.film_status as filmStatus,
+            info.film_en_name as filmEnName,
+            film.film_score as filmScore,
+            film.film_preSaleNum as preSaleNum,
+            film.film_box_office as boxOffice,
+            film.film_time as filmTime,
+            info.film_length as filmLength,
+            film.img_address as mainImg
+        from mooc_film_t film left join mooc_film_info_t info on film.UUID = info.film_id
+    </select>
+
+    <select id="describeFilmById" resultType="com.mooc.meetingfilm.film.controller.vo.DescribeFilmRespVO">
+        select
+            film.UUID as filmId,
+            film.film_name as filmName,
+            (
+                select
+                    group_concat(show_name separator ",")
+                from
+                    mooc_cat_dict_t cat
+                where
+                    find_in_set( cat.UUID, ( select replace(trim(both '#' from film.film_cats), "#", ",") from mooc_film_t f where f.uuid = film.UUID ) )) as filmCats,
+            (
+                select
+                    group_concat(role_name separator ',')
+                from
+                    mooc_film_actor_t actor
+                where
+                    actor.film_id = film.UUID) as actors,
+            film.img_address as imgAddress,
+            info.film_imgs as subAddress
+        from
+            mooc_film_t film
+                left join mooc_film_info_t info on
+                film.UUID = info.film_id
+    </select>
+</mapper>

@@ -1,23 +1,14 @@
 server:
-  port: 7301
+  port: 8401
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
-mybatis-plus:
-  mapper-locations: classpath*:com/mooc/meetingfilm/**/xml/*Mapper.xml
-  global-config:
-    db-config:
-      id-type: 0 #0:数据库ID资增 1:用户输入id 2:全局唯一id(IDWorker) 3:全局唯一ID
-      db-column-underline: false
-      refresh-mapper: true
-
 spring:
   application:
-    name: backend_user
-
+    name: film-service
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
@@ -26,6 +17,14 @@ spring:
       username: root
       password: ch23138210CH
       filters: lo4j,wall,mergeStat
+
+mybatis-plus:
+  mapper-locations: classpath*:com/mooc/meetingfilm/**/xml/*Mapper.xml
+  global-config:
+    db-config:
+      id-type: 0 #0:数据库ID资增 1:用户输入id 2:全局唯一id(IDWorker) 3:全局唯一ID
+      db-column-underline: false
+      refresh-mapper: true
 
 logging:
   config: classpath:logback.xml

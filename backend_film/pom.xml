@@ -9,10 +9,10 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>com.mooc.meetingfilm</groupId>
-	<artifactId>backend-user</artifactId>
+	<artifactId>backend-film</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>backend-user</name>
-	<description>用户模块</description>
+	<name>backend-film</name>
+	<description>影院模块</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -35,6 +35,18 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 
 </project>
