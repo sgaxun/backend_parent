@@ -10,6 +10,6 @@
     </resultMap>
 
     <select id="describeActors" resultType="com.mooc.meetingfilm.film.controller.vo.DescribeActorsRespVO">
-        select 'uuid' as actorId, actor_name as actorName from mooc_actor_t
+        select uuid as actorId, actor_name as actorName from mooc_actor_t
     </select>
 </mapper>

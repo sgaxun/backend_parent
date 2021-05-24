@@ -37,7 +37,7 @@ public class BaseResponseVO<T> {
     public static<T> BaseResponseVO success(T data){
         BaseResponseVO response = new BaseResponseVO();
         response.setCode(200);
-        response.setMessage("");
+        response.setMessage("请求成功");
         response.setData(data);
         return response;
     }
